@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/NicolasBighetti/F.A.S.Table#readme",
   "dependencies": {
+    "socket.io": "^2.0.4",
     "tuioclient": "git+https://github.com/AtelierIHMTable/TUIOClient.git",
     "tuiomanager": "git+https://github.com/AtelierIHMTable/TUIOManager.git"
   }
