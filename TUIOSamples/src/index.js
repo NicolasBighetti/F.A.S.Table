@@ -21,6 +21,23 @@ const tuioManager = new TUIOManager();
 tuioManager.start();
 
 /** App Code **/
+function sendColor(){
+  var socket = io.connect('http://10.212.115.16:8080'); // TODO: changer l'adresse IP
+  socket.emit('FAST_TABLE_CONNECT', {});
+
+  for (var i=0;i<4;i++){
+    var jsonObject = {
+      ATOM_PLAYER_ID: i,
+      ATOM_PHONE_ID: i
+    };
+    socket.emit('FAST_PHONE_CONNECT', jsonObject);
+  }
+
+  socket.on('FAST_PHONE_CONNECT', function(data){
+    // Change colors of the colored div
+    document.getElementById( 'color_div'+data.ATOM_PLAYER_ID ).style.backgroundColor = data.COLOR.color;
+  });
+}
 
 
 function initSocketIO(){
@@ -88,7 +105,7 @@ function initSocketIO(){
 const buildApp = () => {
   $('#app').append('<div id="example-container"> </div>');
   // buildMenu();
-
+  sendColor();
   initSocketIO();
 };
 
