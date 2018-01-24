@@ -9,6 +9,7 @@ import $ from 'jquery/dist/jquery.min';
 
 // Import TUIOManager
 import TUIOManager from 'tuiomanager/core/TUIOManager';
+import Vaisseaux from './vaisseaux';
 
 // import buildMenu from './menu';
 
@@ -42,7 +43,7 @@ function sendColor(){
 
 function initSocketIO(){
   var sounds = ["http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Navi_Hello1.wav","http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Navi_Hey1.wav","http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Navi_Listen1.wav","http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Navi_WatchOut1.wav"];
-  var socket = io.connect('http://192.168.1.50:8080');//('http://localhost:8080');
+  var socket = io.connect('http://localhost:8080');//('http://192.168.1.50:8080');
 
   var pseudo = prompt('Quel est votre pseudo ?');
   var port = 0;
@@ -107,6 +108,7 @@ const buildApp = () => {
   // buildMenu();
   sendColor();
   initSocketIO();
+  Vaisseaux();
 };
 
 $(window).ready(() => {
