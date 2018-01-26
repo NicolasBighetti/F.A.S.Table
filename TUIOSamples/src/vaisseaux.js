@@ -28,20 +28,26 @@ function RemoveWidgets() {
   widgets = [];
 }
 
-function buildUserTest() {
+function buildGame() {
   RemoveWidgets();
-  $('#example-container').append('<img src="assets/vaissaux.png" width="1500">');
+  $('#example-container').append('<img src="assets/vaissaux.png" width="1800">');
   // Stack site web
-  const salle = new RoomWidget(990, 200, 210, 150, 'control');
-  AddWidgetToScreen(salle);
+  const salleContol = new RoomWidget(990, 200, 210, 150, 'control');
+  AddWidgetToScreen(salleContol);
+  const couloir = new RoomWidget(480, 380, 510, 100, 'coulior');
+  AddWidgetToScreen(couloir);
 }
 
 function buildTest() {
   RemoveWidgets();
-  $('#example-container').append('<img src="assets/vaissaux.png" width="1500">');
+  $('#example-container').append('<img src="assets/vaissaux.png" width="1800">');
   // Stack site web
-  const salle = new ImageElementWidget(50, 50, 50, 50, './../assets/joy.png');
-  AddWidgetToScreen(salle);
+  const image = new ImageElementWidget(0, 0, 50, 50, './../assets/joy.png');
+  AddWidgetToScreen(image);
+  const room1 = new RoomWidget(990, 200, 210, 150, 'control');
+  AddWidgetToScreen(room1);
+  const conner = new RoomWidget(1000, 0, 600, 200, '');
+  AddWidgetToScreen(conner);
 }
 
 export default function buildMenu() {
@@ -49,7 +55,7 @@ export default function buildMenu() {
   $('#example-container').append('<button id="test" class="menu-button"> test </button></br>');
 
   $('#start').on('click', () => {
-    buildUserTest();
+    buildGame();
   });
 
   $('#test').on('click', () => {

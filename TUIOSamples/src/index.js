@@ -23,7 +23,7 @@ tuioManager.start();
 
 /** App Code **/
 function sendColor(){
-  var socket = io.connect('http://10.212.115.16:8080'); // TODO: changer l'adresse IP
+  var socket = io.connect(('http://localhost:8080')); // TODO: changer l'adresse IP
   socket.emit('FAST_TABLE_CONNECT', {});
 
   for (var i=0;i<4;i++){
@@ -37,6 +37,7 @@ function sendColor(){
   socket.on('FAST_PHONE_CONNECT', function(data){
     // Change colors of the colored div
     document.getElementById( 'color_div'+data.ATOM_PLAYER_ID ).style.backgroundColor = data.COLOR.color;
+    players_color[data.ATOM_PLAYER_ID] = data.COLOR.color;
   });
 }
 
@@ -45,7 +46,7 @@ function initSocketIO(){
   var sounds = ["http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Navi_Hello1.wav","http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Navi_Hey1.wav","http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Navi_Listen1.wav","http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Navi_WatchOut1.wav"];
   var socket = io.connect('http://localhost:8080');//('http://192.168.1.50:8080');
 
-  var pseudo = prompt('Quel est votre pseudo ?');
+  var pseudo = 'table';
   var port = 0;
 
   function addMessageLocal(message){
@@ -106,8 +107,8 @@ function initSocketIO(){
 const buildApp = () => {
   $('#app').append('<div id="example-container"> </div>');
   // buildMenu();
-  sendColor();
   initSocketIO();
+  sendColor();
   Vaisseaux();
 };
 
