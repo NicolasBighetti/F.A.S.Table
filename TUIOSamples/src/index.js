@@ -20,10 +20,11 @@ import io from 'socket.io-client';
 /** TUIOManager starter **/
 const tuioManager = new TUIOManager();
 tuioManager.start();
+const players_color = ['blue','red'];
 
 /** App Code **/
 function sendColor(){
-  var socket = io.connect(('http://localhost:8080')); // TODO: changer l'adresse IP
+  var socket = io.connect('http://192.168.1.50:8080'); // TODO: changer l'adresse IP
   socket.emit('FAST_TABLE_CONNECT', {});
 
   for (var i=0;i<4;i++){
@@ -44,7 +45,7 @@ function sendColor(){
 
 function initSocketIO(){
   var sounds = ["http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Navi_Hello1.wav","http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Navi_Hey1.wav","http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Navi_Listen1.wav","http://noproblo.dayjo.org/ZeldaSounds/OOT/OOT_Navi_WatchOut1.wav"];
-  var socket = io.connect('http://localhost:8080');//('http://192.168.1.50:8080');
+  var socket = io.connect('http://192.168.1.50:8080');//('http://localhost:8080')('http://192.168.1.50:8080');
 
   var pseudo = 'table';
   var port = 0;
