@@ -1,32 +1,59 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="src/examples.css">
-    <link rel="stylesheet" type="text/css" href="node_modules/tuiomanager/widgets/CircularMenu/circularmenu.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>TUIOSamples</title>
-  </head>
-  <body>
+<head>
+    <title>Cyber Orb demo</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <style>
+    body {
+        margin: 0;
+        background-color: #F2F2F2;
+    }
+    </style>
 
-    <!--<script src="node_modules/socket.io/socket.io.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script> -->
+    <script src="dist/src/phaser.min.js"></script>
+    <!--<script src="dist/src/table_gamestates/tableGame.js"></script>
 
-    <div id="app">
-    </div>
-    <div id="color_div0">
-      <h1>COLOR 0</h1>
-    </div>
-    <div id="color_div1">
-      <h1>COLOR 1</h1>
-    </div>
-    <div id="color_div2">
-      <h1>COLOR 2</h1>
-    </div>
-    <div id="color_div3">
-      <h1>COLOR 3</h1>
-    </div>
-  </body>
+    <script src="src/phaser.min.js"></script>
+
+
+    <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script src="node_modules/socket.io-p2p/socketiop2p.min.js"></script>
+    <script src="src/net/NetProtocol.js"></script>
+    <script src="src/utils/MiniGameEnum.js"></script>
+    <script src="src/net/FASockeT.js"></script>
+    <script src="src/net/PeerSocket.js"></script>
+    <script src="src/utils/EventRegistry.js"></script>
+    <script src="src/utils/BroadcastUtils.js"></script>
+    <script src="src/utils/Broadcaster.js"></script>
+    <script src="src/net/SignalRegistry.js"></script>
+    <script src="src/resources/SplashEnum.js"></script>
+
+    <script src="src/gamestates/Boot.js"></script>
+    <script src="src/gamestates/SplashScreen.js"></script>
+    <script src="src/gamestates/game/FastFire.js"></script>
+    <script src="src/gamestates/Game.js"></script>
+    -->
+
+</head>
+<script>
+
+(function() {
+    console.log("TEST1");
+    console.log("TEST2");
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+    function preload() {
+        game.load.image('flame_1', 'dist/img/flame_1.png');
+    }
+
+    function create() {
+        game.add.sprite(0, 0, 'flame_1');
+    }
+
+    function update() {
+    }
+})();
+</script>
+
 </html>
