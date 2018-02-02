@@ -10,7 +10,6 @@ import $ from 'jquery/dist/jquery.min';
 // Import TUIOManager
 import TUIOManager from 'tuiomanager/core/TUIOManager';
 
-import { buildMenu } from './menu';
 
 /** TUIOManager starter **/
 const tuioManager = new TUIOManager();
@@ -20,8 +19,8 @@ tuioManager.start();
 
 const buildApp = () => {
   $('#app').append('<div id="example-container"> </div>');
-  buildMenu();
-};
+
+  };
 
 $(window).ready(() => {
   buildApp();
