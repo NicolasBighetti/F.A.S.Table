@@ -11,7 +11,10 @@
     }
     </style>
 
+    <script src="src/index.js"></script>
     <script src="src/phaser.min.js"></script>
+    <script src="src/TestWidget.js"></script>
+    <script src="src/DemoState.js"></script>
     <!--<script src="dist/src/table_gamestates/tableGame.js"></script>
 
     <script src="src/phaser.min.js"></script>
@@ -41,18 +44,9 @@
 (function() {
     console.log("TEST1");
     console.log("TEST2");
-    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-
-    function preload() {
-        game.load.image('flame_1', 'src/img/flame_1.png');
-    }
-
-    function create() {
-        game.add.sprite(0, 0, 'flame_1');
-    }
-
-    function update() {
-    }
+    var game = new Phaser.Game(1920, 1080, Phaser.CANVAS, 'game');
+    game.state.add('Demo', FastTable.DemoState);
+    game.state.start('Demo');
 })();
 </script>
 
