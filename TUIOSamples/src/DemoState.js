@@ -22,8 +22,8 @@ FastTable.DemoState.prototype = {
     this.frontLayer = this.game.add.tileSprite(0, 0, 1920, 1080, 'star_layer_2');
 
 		var nbRoom = 5;
-		var maxHeight = ;
-		var maxWidth = ;
+		//var maxHeight = FastTable;
+		//var maxWidth = ;
 
 
 

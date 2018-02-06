@@ -19,8 +19,7 @@ tuioManager.start();
 
 const buildApp = () => {
   $('#app').append('<div id="example-container"> </div>');
-
-  };
+};
 
 $(window).ready(() => {
   buildApp();
