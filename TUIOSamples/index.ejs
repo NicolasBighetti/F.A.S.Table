@@ -13,8 +13,6 @@
 
     <script src="src/index.js"></script>
     <script src="src/phaser.min.js"></script>
-    <script src="src/TestWidget.js"></script>
-    <script src="src/states/DemoState.js"></script>
     <script src="src/states/TitleScreen.js"></script>
     <script src="src/states/IpPicker.js"></script>
     <script src="src/states/ColorIOTable.js"></script>
@@ -39,12 +37,12 @@
 
 (function() {
     var game = new Phaser.Game(1920, 1080, Phaser.CANVAS, 'game');
-    game.state.add('Demo', FastTable.DemoState);
+    game.state.add('TitleScreen', FastTable.TitleScreen);
     game.state.add('IpPicker', FastTable.IpPicker);
     game.state.add('ColorIOTable', FastTable.ColorIOTable);
     game.state.add('TutoDemo', FastTable.TutoDemo);
     game.state.add('Ship', FastTable.Ship);
-    game.state.start('Demo');
+    game.state.start('TitleScreen');
 })();
 </script>
 
