@@ -18,15 +18,15 @@ const resolvePaths = [
 const htmlWebpackPluginInstance = new HtmlWebpackPlugin({
   template: './index.ejs',
   filename: './index.html',
-  showErrors: true,
+  showErrors: true
 });
 const copyWebpackPluginInstance = new CopyWebpackPlugin(
   [
-    { from: './assets', to: './assets' },
+    { from: './assets', to: './assets' }
   ],
   {
     copyUnmodified: false,
-    debug: 'debug',
+    debug: 'debug'
   }
 );
 

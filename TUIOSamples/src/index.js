@@ -9,18 +9,23 @@ import $ from 'jquery/dist/jquery.min';
 
 // Import TUIOManager
 import TUIOManager from 'tuiomanager/core/TUIOManager';
-
+import RoomWidget from './ImageWidget/roomWidget';
 
 /** TUIOManager starter **/
 const tuioManager = new TUIOManager();
-tuioManager.start();
 
 /** App Code **/
 
 const buildApp = () => {
-  $('#app').append('<div id="example-container"> </div>');
+
 };
 
 $(window).ready(() => {
+  tuioManager.start();
+  var shipwidget = new RoomWidget(0, 0, 1920, 1080 ,'',gameO);
+  tuioManager.addWidget(shipwidget);
+
+var gg = window.gameO;
+  console.log(gg);
   buildApp();
 });
