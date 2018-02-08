@@ -23,8 +23,8 @@ webpackConfig.plugins.push(
     compress: {
       unused: true,
       dead_code: true,
-      warnings: false,
-    },
+      warnings: false
+    }
   })
 );
 

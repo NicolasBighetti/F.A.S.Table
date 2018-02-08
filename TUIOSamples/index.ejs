@@ -11,7 +11,9 @@
     }
     </style>
 
+<!--
     <script src="src/index.js"></script>
+-->
     <script src="src/phaser.min.js"></script>
 
     <script src="src/sound/FastSound.js"></script>
@@ -28,6 +30,12 @@
     <script src="src/states/ColorIOTable.js"></script>
     <script src="src/states/TutoDemo.js"></script>
     <script src="src/states/Ship.js"></script>
+<!--
+    <script src="node_modules/tuiomanager/core/TUIOManager.js"></script>
+-->
+<!--
+    <script src="src/ImageWidget/roomWidget.js"></script>
+-->
 
     <!--<script src="dist/src/table_gamestates/tableGame.js"></script>
 
@@ -43,6 +51,12 @@
 <script>
 
 (function() {
+    console.log('oi');
+/*    const tuioManager = new TUIOManager();
+    tuioManager.start();
+    tuioManager.addWidget(new RoomWidget(0,0,1080,1920,''));*/
+
+
     var game = new Phaser.Game(1920, 1080, Phaser.CANVAS, 'game');
     game.state.add('TitleScreen', FastTable.TitleScreen);
     game.state.add('IpPicker', FastTable.IpPicker);
@@ -50,7 +64,9 @@
     game.state.add('TutoDemo', FastTable.TutoDemo);
     game.state.add('Ship', FastTable.Ship);
     game.state.start('TitleScreen');
+    window.gameO = game;
 })();
 </script>
-
+<div id="app">
+</div>
 </html>

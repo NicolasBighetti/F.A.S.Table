@@ -173,9 +173,9 @@ function buildMusic() {
   $('#example-container').empty();
   buildBackButton();
   $('#example-container').append('<div id="music-container"> </div>');
-  $('#music-container').append('<div class="music-subcontainer"><img src="assets/example-music/guitar.png" > <div class="music-target"></div> </div>');
-  $('#music-container').append('<div class="music-subcontainer"><img src="assets/example-music/piano.png" ><div class="music-target"></div> </div>');
-  $('#music-container').append('<div class="music-subcontainer"><img src="assets/example-music/saxophone.png" ><div class="music-target"></div> </div>');
+  $('#music-container').append('<div class="music-subcontainer"><img src="../assets/example-music/guitar.png" > <div class="music-target"></div> </div>');
+  $('#music-container').append('<div class="music-subcontainer"><img src="../assets/example-music/piano.png" ><div class="music-target"></div> </div>');
+  $('#music-container').append('<div class="music-subcontainer"><img src="../assets/example-music/saxophone.png" ><div class="music-target"></div> </div>');
 
   const fluteVid = new VideoElementWidget(250, 800, 150, 84, SpawnRotation('medium'), 1, 'assets/example-music/flute.mp4', 'B3', 'C9', '38', '3');
   AddWidgetToScreen(fluteVid);
