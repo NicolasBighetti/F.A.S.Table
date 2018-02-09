@@ -79,7 +79,7 @@ FastTable.ColorIOTable.prototype = {
     },
     bluePaneover2:function (game,pointer) {
           var tagID = this.convertPointer(pointer);
-        
+
 
         this.bluePane.alpha = 0.5;
 
