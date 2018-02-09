@@ -7,6 +7,7 @@ FastTable.ColorIOTable.prototype = {
         this.greenOK=-1;
         this.blueOK=-1;
         this.whiteOK=-1;
+        this.sent=false;
         FastTable.FastSocket = new FASockeT('10.212.115.16');
         FastTable.FastSocket.init();
     },
@@ -115,6 +116,11 @@ FastTable.ColorIOTable.prototype = {
             ATOM_PHONE_ID: 7
         };
         console.log('sending start to serv');
+        if(this.sent){
+            console.log('connect already sent');
+            return;
+        }
+        this.sent = true;
         FastTable.FastSocket.serverSocket.emit('FAST_PHONE_CONNECT', jsonObject1);
         FastTable.FastSocket.serverSocket.emit('FAST_PHONE_CONNECT', jsonObject2);
         FastTable.FastSocket.serverSocket.emit('FAST_PHONE_CONNECT', jsonObject3);
