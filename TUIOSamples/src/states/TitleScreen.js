@@ -30,14 +30,20 @@ FastTable.TitleScreen.prototype = {
     this.background = this.game.add.tileSprite(0, 0, 1920, 1080, 'background');
     this.mediumLayer = this.game.add.tileSprite(0, 0, 1920, 1080, 'star_layer');
     this.frontLayer = this.game.add.tileSprite(0, 0, 1920, 1080, 'star_layer_2');
-/*<<<<<<< HEAD
-    this.room = this.frontLayer;
+
+    this.logo = this.game.add.sprite(560, 320, 'logo');
+    this.startUp = this.game.add.sprite(616,250,'startUp');
+    this.startDown = this.game.add.sprite(616,740,'startDown');
     this.fastSound.playMusic('title');
+    this.game.input.onTap.add(this.goToNextState, this);
+    this.game.time.events.loop(Phaser.Timer.HALF, this.blinkSprite, this);
+
+/*    this.room = this.frontLayer;
     this.room = this.game.add.tileSprite(0, 0, 1920, 1080, 'room1');
     this.room.inputEnabled = true;
         this.room.alpha = 0.5;
         this.room.anchor.set(0.5);
-        this.game.input.addMoveCallback(this.p, this);
+        this.game.input.addMoveCallback(this.p, this);*/
 
         //this.game.events.onInputDown.add(this.p, this);*/
 

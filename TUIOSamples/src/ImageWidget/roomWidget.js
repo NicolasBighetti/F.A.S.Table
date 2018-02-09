@@ -25,16 +25,16 @@ class RoomWidget extends TUIOWidget {
       this.atomsNB+=1;
     console.log('creation', + tuioTag.x +' '+ tuioTag.y+' '+tuioTag.id);
     console.dir(tuioTag);
-    this.game.input.addPointer();
-    console.log('oi');
-    var event = new MouseEvent('click', {
+   /* this.game.input.addPointer();
+    console.log('oi');*/
+  /*  var event = new MouseEvent('click', {
         'view': window,
         'bubbles': true,
         'cancelable': true,
         'clientX': tuioTag.x,
         'clientY': tuioTag.y
     });
-      document.body.dispatchEvent(event);
+      document.body.dispatchEvent(event);*/
 
     if (this.isTouched(tuioTag.x, tuioTag.y)){
       // this._domElem.css('background-color', players_color[tuioTag.id]);
@@ -42,8 +42,8 @@ class RoomWidget extends TUIOWidget {
   }
 
   onTagDeletion(tuioTagId){
-      /*this.atoms[tuioTagId] = -1;
-      this.atomsNB-=1;*/
+      this.atoms[tuioTagId] = -1;
+      this.atomsNB-=1;
       console.log('deletion', + JSON.stringify(tuioTagId));
 
       super.onTagDeletion(tuioTagId);
@@ -66,7 +66,7 @@ class RoomWidget extends TUIOWidget {
   }
 
   onTagUpdate(tuioTag) {
-      console.log('up'+tuioTag.id);
+      //console.log('up'+tuioTag.id);
       var event = new MouseEvent('mousemove', {
           'view': window,
           'bubbles': true,
@@ -82,9 +82,9 @@ class RoomWidget extends TUIOWidget {
 
       });
         event.identifier = tuioTag.id;
-        console.log(event.identifier)
+        //console.log(event.identifier)
       var y = document.getElementsByTagName("canvas")[0];
-      console.log(y);
+      //console.log(y);
       y.dispatchEvent(event);
   }
 }
