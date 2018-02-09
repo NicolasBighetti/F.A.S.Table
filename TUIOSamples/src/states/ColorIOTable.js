@@ -44,10 +44,10 @@ FastTable.ColorIOTable.prototype = {
 
         this.bluePane.inputEnabled = true;
         this.bluePane.events.onInputOver.add(this.bluePaneover, this);
+        this.bluePane.events.onInputOut.add(this.bluePaneover2, this);
 
         this.greenPane.inputEnabled = true;
         this.greenPane.events.onInputOver.add(this.greenPaneover, this);
-        this.greenPane.events.onInputOut.add(this.greenPaneover2, this);
 
 
         this.whitePane.inputEnabled = true;
@@ -77,6 +77,19 @@ FastTable.ColorIOTable.prototype = {
         console.log('green'+tagID);
         this.checkSend();
 
+    },bluePaneover:function (game,pointer) {
+
+        var tagID = this.convertPointer(pointer);
+        this.blueOK=tagID;
+        this.bluePane.alpha = 1;
+
+        console.log('blue'+tagID);
+        this.checkSend();
+
+        /*
+                this.checkSend();
+        */
+
     },
     bluePaneover2:function (game,pointer) {
           var tagID = this.convertPointer(pointer);
@@ -84,7 +97,7 @@ FastTable.ColorIOTable.prototype = {
 
         this.bluePane.alpha = 0.5;
 
-        console.log('blue'+tagID);
+        console.log('blue remove'+tagID);
 /*
         this.checkSend();
 */
