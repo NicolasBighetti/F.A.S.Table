@@ -3,7 +3,7 @@ FastTable.TutoDemo = function(game) {
 };
 FastTable.TutoDemo.prototype = {
   init: function() {
-
+    this.game.stage.disableVisibilityChange = true;
   },
 	preload: function() {
 

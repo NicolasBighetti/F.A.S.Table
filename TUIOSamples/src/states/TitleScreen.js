@@ -10,7 +10,7 @@ FastTable.TitleScreen = function(game) {
 };
 FastTable.TitleScreen.prototype = {
   init: function() {
-
+		this.game.stage.disableVisibilityChange = true;
   },
 	preload: function() {
     this.game.load.image('background', './src/img/splash_background.jpg');

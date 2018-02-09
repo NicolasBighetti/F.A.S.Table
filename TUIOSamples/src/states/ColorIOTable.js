@@ -10,6 +10,7 @@ FastTable.ColorIOTable.prototype = {
         this.sent=false;
         FastTable.FastSocket = new FASockeT('10.212.115.16');
         FastTable.FastSocket.init();
+        this.game.stage.disableVisibilityChange = true;
     },
     preload: function() {
         this.game.load.image('red', './src/img/red.png');

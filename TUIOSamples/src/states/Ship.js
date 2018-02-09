@@ -4,7 +4,7 @@ FastTable.Ship = function(game) {
 FastTable.Ship.prototype = {
   init: function() {
       this.rooms =[];
-
+      this.game.stage.disableVisibilityChange = true;
   },
 	preload: function() {
         this.game.load.image('background', './src/img/splash_background.jpg');

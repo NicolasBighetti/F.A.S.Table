@@ -3,7 +3,7 @@ FastTable.IpPicker = function(game) {
 };
 FastTable.IpPicker.prototype = {
   init: function() {
-
+    this.game.stage.disableVisibilityChange = true;
   },
 	preload: function() {
 
