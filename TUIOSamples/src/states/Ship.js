@@ -60,6 +60,7 @@ FastTable.Ship.prototype = {
         this.roomEmpty3.inputEnabled = true;
         this.roomShield.inputEnabled = true;
         this.roomReact.inputEnabled = true;
+        this.roomWeapon.inputEnabled = true;
 
         this.roomShield.events.onInputOver.add(this.roomShieldCB, this);
         this.roomEmpty.events.onInputOver.add(this.roomEmptyCB, this);

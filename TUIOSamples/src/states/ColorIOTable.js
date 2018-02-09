@@ -7,6 +7,8 @@ FastTable.ColorIOTable.prototype = {
         this.greenOK=-1;
         this.blueOK=-1;
         this.whiteOK=-1;
+        FastTable.FastSocket = new FASockeT('10.212.115.16');
+        FastTable.FastSocket.init();
     },
     preload: function() {
         this.game.load.image('red', './src/img/red.png');
@@ -68,7 +70,7 @@ FastTable.ColorIOTable.prototype = {
         this.greenOK=tagID;
         this.greenPane.alpha = 1;
 
-        console.log('gree,'+tagID);
+        console.log('green'+tagID);
         this.checkSend();
 
     },
@@ -112,20 +114,17 @@ FastTable.ColorIOTable.prototype = {
             ATOM_PLAYER_ID: this.whiteOK,
             ATOM_PHONE_ID: 7
         };
-        this.game.state.start('Ship');
+        console.log('sending start to serv');
+        FastTable.FastSocket.serverSocket.emit('FAST_PHONE_CONNECT', jsonObject1);
+        FastTable.FastSocket.serverSocket.emit('FAST_PHONE_CONNECT', jsonObject2);
+        FastTable.FastSocket.serverSocket.emit('FAST_PHONE_CONNECT', jsonObject3);
+        FastTable.FastSocket.serverSocket.emit('FAST_PHONE_CONNECT', jsonObject4);
+        FastTable.FastSocket.serverSocket.on('FAST_PHONE_OK', function (data) {
+            this.game.state.start('Ship');
 
-        /*
-            TODO SEND THIS
-        socket.emit('FAST_PHONE_CONNECT', jsonObject1);
-                socket.emit('FAST_PHONE_CONNECT', jsonObject2);
-                socket.emit('FAST_PHONE_CONNECT', jsonObject3);
-                socket.emit('FAST_PHONE_CONNECT', jsonObject4);
-                TODO LISTEN FOR SERVER OK
-                socket.on('FAST_PHONE_OK',mess){
-                        this.game.state.start('ColorIOTable');
+            console.log(data);
+        });
 
-                }
-                */
 
 
 
