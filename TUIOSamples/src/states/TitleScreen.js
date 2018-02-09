@@ -35,8 +35,17 @@ FastTable.TitleScreen.prototype = {
     this.startUp = this.game.add.sprite(616,250,'startUp');
     this.startDown = this.game.add.sprite(616,740,'startDown');
     this.fastSound.playMusic('title');
-    this.game.input.onTap.add(this.goToNextState, this);
-    this.game.time.events.loop(Phaser.Timer.HALF, this.blinkSprite, this);
+
+        //this.logo.events.onInputOver.add(this.ppp, this);
+
+        //this.game.input.onTap.add(this.ppp, this);
+        //this.game.input.onDown.add(this.ppp, this);
+
+        this.logo.inputEnabled = true;
+        this.logo.events.onInputOver.add(this.ppp, this);
+
+
+        this.game.time.events.loop(Phaser.Timer.HALF, this.blinkSprite, this);
 
 /*    this.room = this.frontLayer;
     this.room = this.game.add.tileSprite(0, 0, 1920, 1080, 'room1');
@@ -48,6 +57,11 @@ FastTable.TitleScreen.prototype = {
         //this.game.events.onInputDown.add(this.p, this);*/
 
     },
+    ppp:function (game,pointer) {
+      console.log('over');
+        this.goToNextState();
+    }
+    ,
     conver:function(left,right,middle){
       if(!left&&!right&&!middle){
           return 0;

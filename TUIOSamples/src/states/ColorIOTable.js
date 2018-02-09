@@ -41,6 +41,7 @@ FastTable.ColorIOTable.prototype = {
 
         this.redPane.inputEnabled = true;
         this.redPane.events.onInputOver.add(this.redover, this);
+        this.redPane.events.onInputOut.add(this.redover2, this);
 
         this.bluePane.inputEnabled = true;
         this.bluePane.events.onInputOver.add(this.bluePaneover, this);
@@ -48,10 +49,13 @@ FastTable.ColorIOTable.prototype = {
 
         this.greenPane.inputEnabled = true;
         this.greenPane.events.onInputOver.add(this.greenPaneover, this);
+        this.greenPane.events.onInputOut.add(this.greenPaneover2, this);
 
 
         this.whitePane.inputEnabled = true;
         this.whitePane.events.onInputOver.add(this.whitePaneover, this);
+        this.whitePane.events.onInputOut.add(this.whitePaneover2, this);
+
         // this.game.input.addMoveCallback(this.p, this);
 
         this.redPane.alpha = 0.5;
@@ -86,22 +90,38 @@ FastTable.ColorIOTable.prototype = {
         console.log('blue'+tagID);
         this.checkSend();
 
-        /*
-                this.checkSend();
-        */
-
     },
     bluePaneover2:function (game,pointer) {
           var tagID = this.convertPointer(pointer);
+          if(tagID==this.blueOK){
+              this.bluePane.alpha = 0.5;
+              console.log('blue remove'+tagID);
+          }
+          console.log('not same');
 
-
-        this.bluePane.alpha = 0.5;
-
-        console.log('blue remove'+tagID);
-/*
-        this.checkSend();
-*/
-
+    },
+    greenPaneover2:function (game,pointer) {
+        var tagID = this.convertPointer(pointer);
+        this.greenPane.alpha = 0.5;
+        console.log('greenPane remove'+tagID);
+        if(tagID==this.greenOK){
+            this.greenPane.alpha = 0.5;
+            console.log('greenPane remove'+tagID);
+        }
+    },
+    whitePaneover2:function (game,pointer) {
+        var tagID = this.convertPointer(pointer);
+        if(tagID==this.whiteOK){
+            this.whitePane.alpha = 0.5;
+            console.log('whitePane remove'+tagID);
+        }
+    },
+    redover2:function (game,pointer) {
+        var tagID = this.convertPointer(pointer);
+        if(tagID==this.redOK){
+            this.redPane.alpha = 0.5;
+            console.log('redPane remove'+tagID);
+        }
     },
     whitePaneover:function (game,pointer) {
         var tagID = this.convertPointer(pointer);

@@ -51,17 +51,22 @@ class RoomWidget extends TUIOWidget {
   }
 
   onTouchUpdate(tuioTouch) {
-      console.log('touch'+tuioTouch.x+' '+tuioTouch.y+' id'+tuioTouch.id);
-      var event = new MouseEvent('clic', {
+
+      var event = new MouseEvent('mousemove', {
           'view': window,
           'bubbles': true,
           'cancelable': true,
           'clientX': tuioTouch.x,
           'clientY': tuioTouch.y,
-          'buttons': this.atoms[tuioTouch.id]
+          'button':0,
+          'buttons':0
       });
+      console.log(tuioTouch.x + '' +tuioTouch.y);
+      console.log(event);
+      //event.isTrusted = true;
+      //console.log(event.identifier)
       var y = document.getElementsByTagName("canvas")[0];
-      console.log(y);
+      //console.log(y);
       y.dispatchEvent(event);
   }
 
