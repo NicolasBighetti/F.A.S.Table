@@ -22,10 +22,11 @@ const buildApp = () => {
 
 $(window).ready(() => {
   tuioManager.start();
-  var shipwidget = new RoomWidget(0, 0, 1920, 1080 ,'',gameO);
+  var shipwidget = new RoomWidget(0, 0, 1920, 1080 ,'',window.gameO);
+  /*window.gameF(shipwidget);*/
+
   tuioManager.addWidget(shipwidget);
 
-var gg = window.gameO;
-  console.log(gg);
+  console.log(window.gameO);
   buildApp();
 });
