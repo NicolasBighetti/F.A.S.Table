@@ -73,8 +73,8 @@ class RoomWidget extends TUIOWidget {
           'cancelable': true,
           'clientX': tuioTouch.x,
           'clientY': tuioTouch.y,
-          'button':5,
-          'buttons':5
+          'button':4,
+          'buttons':4
       });
       console.log('touch: '+tuioTouch.x + ' ' +tuioTouch.y);
       console.dir(event);
