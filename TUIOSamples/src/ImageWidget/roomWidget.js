@@ -33,6 +33,7 @@ class RoomWidget extends TUIOWidget {
   onTagCreation(tuioTag) {
     super.onTagCreation(tuioTag);
     var index = this.findFirstEmptyTagIndex();
+    console.log('index free:'+index);
     this.atomsOS[index] = tuioTag.id;
       this.atoms[tuioTag.id] = index;
       this.atomsNB+=1;
