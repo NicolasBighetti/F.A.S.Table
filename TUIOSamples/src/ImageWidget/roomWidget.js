@@ -38,6 +38,8 @@ class RoomWidget extends TUIOWidget {
       this.atomsNB+=1;
     console.log('creation', + tuioTag.x +' '+ tuioTag.y+' '+tuioTag.id);
     console.dir(tuioTag);
+    console.dir(this.atomsOS);
+    console.dir(this.atoms);
    /* this.game.input.addPointer();
     console.log('oi');*/
   /*  var event = new MouseEvent('click', {
@@ -57,7 +59,7 @@ class RoomWidget extends TUIOWidget {
   onTagDeletion(tuioTagId){
       this.atoms[tuioTagId] = -1;
       this.atomsNB-=1;
-      console.log('deletion', + JSON.stringify(tuioTagId));
+      console.log('deletion', + tuioTagId);
 
       super.onTagDeletion(tuioTagId);
       // this._domElem.css('background-color', 'yellow');
