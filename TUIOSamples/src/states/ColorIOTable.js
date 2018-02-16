@@ -34,7 +34,7 @@ FastTable.ColorIOTable.prototype = {
         this.frontLayer = this.game.add.tileSprite(0, 0, 1920, 1080, 'star_layer_2');
 
         this.frontLayer.inputEnabled = true;
-        this.redPane.events.onInputOver.add(this.cross, this);
+        this.frontLayer.events.onInputOver.add(this.cross, this);
 
         this.redPane = this.game.add.sprite(200,200,'red');
         this.greenPane = this.game.add.sprite(1200,200,'green');
