@@ -22,7 +22,7 @@ function FASockeT(ip){
     //TODO : change this
     //TEMPORARY
     this.broadcastSocket = this.serverSocket;
-
+      this.serverSocket.emit('FAST_TABLE_CONNECT', {});
     //Add server behavior
     this.addOnServerCallback(PROTOCOL.FAST_MINI_GAME_REGISTER, this.startP2PSession);
 

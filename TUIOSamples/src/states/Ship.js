@@ -69,6 +69,19 @@ FastTable.Ship.prototype = {
         this.roomWeapon.events.onInputOver.add(this.roomWeaponCB, this);
         this.roomReact.events.onInputOver.add(this.roomReactCB, this);
 
+        FastTable.FastSocket.serverSocket.on('ROOM_FIRE',  (data) => {
+
+            if(data.FIRE){
+            this.fire = this.game.add.sprite(this.roomEmpty.x, this.roomEmpty.y,  'flame');
+            this.fire.scale.setTo(3);
+            }
+        else if (this.fire!=undefined) {
+            this.fire.destroy();
+        }
+
+        // /this[data.room]
+        console.log(data);
+    });
 
 /*        for (var key in this.rooms) {
             if (key === 'length' || !widthRange.hasOwnProperty(key)) continue;
@@ -116,9 +129,11 @@ FastTable.Ship.prototype = {
         var tagID = this.convertPointer(pointer);
         console.log('player '+tagID+' in '+room);
 
-        /*TODO EMIT (server side not done)
-        * socket.emit('ROOM', {TAG_ID:tagID,ROOM:room});
-        * */
+        FastTable.FastSocket.serverSocket.emit('ROOM', {TAG_ID:tagID,ROOM:room});
+
+        //data.roomString
+        //data.fire=true
+
 
     }, convertPointer:function (pointer) {
         return this.conver(pointer.leftButton.isDown,pointer.rightButton.isDown,pointer.middleButton.isDown);

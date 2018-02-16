@@ -7,8 +7,10 @@ FastTable.ColorIOTable.prototype = {
         this.greenOK=-1;
         this.blueOK=-1;
         this.whiteOK=-1;
-        this.sent=false;
-        FastTable.FastSocket = new FASockeT('10.212.115.16');
+        this.sent=false; // 192.168.1.25
+        FastTable.FastSocket = new FASockeT('192.168.1.25');
+        // FastTable.FastSocket = new FASockeT('10.212.115.16');
+
         FastTable.FastSocket.init();
         this.game.stage.disableVisibilityChange = true;
     },
@@ -90,6 +92,15 @@ FastTable.ColorIOTable.prototype = {
         console.log('blue'+tagID);
         this.checkSend();
 
+    },whitePaneover:function (game,pointer) {
+        var tagID = this.convertPointer(pointer);
+        this.whiteOK=tagID;
+
+        this.whitePane.alpha = 1;
+
+        console.log('white'+tagID);
+        this.checkSend();
+
     },
     bluePaneover2:function (game,pointer) {
           var tagID = this.convertPointer(pointer);
@@ -102,8 +113,8 @@ FastTable.ColorIOTable.prototype = {
     },
     greenPaneover2:function (game,pointer) {
         var tagID = this.convertPointer(pointer);
-        this.greenPane.alpha = 0.5;
-        console.log('greenPane remove'+tagID);
+        //this.greenPane.alpha = 0.5;
+
         if(tagID==this.greenOK){
             this.greenPane.alpha = 0.5;
             console.log('greenPane remove'+tagID);
@@ -123,16 +134,7 @@ FastTable.ColorIOTable.prototype = {
             console.log('redPane remove'+tagID);
         }
     },
-    whitePaneover:function (game,pointer) {
-        var tagID = this.convertPointer(pointer);
-        this.whiteOK=tagID;
 
-        this.whitePane.alpha = 1;
-
-        console.log('white'+tagID);
-        this.checkSend();
-
-    },
     checkSend:function () {
         if(this.redOK===-1||this.blueOK===-1||this.greenOK===-1||this.whiteOK===-1){
             return;
@@ -164,7 +166,7 @@ FastTable.ColorIOTable.prototype = {
         FastTable.FastSocket.serverSocket.emit('FAST_PHONE_CONNECT', jsonObject2);
         FastTable.FastSocket.serverSocket.emit('FAST_PHONE_CONNECT', jsonObject3);
         FastTable.FastSocket.serverSocket.emit('FAST_PHONE_CONNECT', jsonObject4);
-        FastTable.FastSocket.serverSocket.on('FAST_PHONE_OK', function (data) {
+        FastTable.FastSocket.serverSocket.on('FAST_PHONE_OK',  (data) => {
             this.game.state.start('Ship');
 
             console.log(data);
