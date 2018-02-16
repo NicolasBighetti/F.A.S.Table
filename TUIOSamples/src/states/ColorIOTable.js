@@ -213,6 +213,6 @@ FastTable.ColorIOTable.prototype = {
   cross:function(game,pointer){
       var tagID = this.convertPointer(pointer);
         if(tagID===0)
-            game.physics.arcade.moveToXY(this.crossOv,pointer.x,pointer.y,1000,1000);
+            this.game.physics.arcade.moveToXY(this.crossOv,pointer.x,pointer.y,1000,1000);
   }
 };
