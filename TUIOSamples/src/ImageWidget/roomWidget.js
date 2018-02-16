@@ -58,6 +58,8 @@ class RoomWidget extends TUIOWidget {
   }
 
   onTagDeletion(tuioTagId){
+      var inverI = this.atoms[tuioTagId];
+      this.atomsOS[inverI] = -1;
       this.atoms[tuioTagId] = -1;
       this.atomsNB-=1;
       console.log('deletion' + tuioTagId);
