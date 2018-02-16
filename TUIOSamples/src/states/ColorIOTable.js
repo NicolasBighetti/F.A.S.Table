@@ -23,6 +23,9 @@ FastTable.ColorIOTable.prototype = {
         this.game.load.image('background', './src/img/splash_background.jpg');
         this.game.load.image('star_layer', './src/img/splash_parallax_layer.png');
         this.game.load.image('star_layer_2', './src/img/splash_parallax_layer_2.png');
+        this.game.load.image('croix', './src/img/croix.png');
+
+
 
     },
     create: function() {
@@ -30,11 +33,16 @@ FastTable.ColorIOTable.prototype = {
         this.mediumLayer = this.game.add.tileSprite(0, 0, 1920, 1080, 'star_layer');
         this.frontLayer = this.game.add.tileSprite(0, 0, 1920, 1080, 'star_layer_2');
 
+        this.frontLayer.inputEnabled = true;
+        this.redPane.events.onInputOver.add(this.cross, this);
 
         this.redPane = this.game.add.sprite(200,200,'red');
         this.greenPane = this.game.add.sprite(1200,200,'green');
         this.bluePane = this.game.add.sprite(1200,600,'blue');
         this.whitePane = this.game.add.sprite(200,600,'white');
+
+        this.crossOv = this.game.add.sprite(-100,-100,'croix');
+
 
         this.redPane.scale.setTo(0.5,0.5);
         this.greenPane.scale.setTo(0.5,0.5);
@@ -201,5 +209,10 @@ FastTable.ColorIOTable.prototype = {
       this.mediumLayer.tilePosition.x += 0.3;
       this.frontLayer.tilePosition.x += 0.5;
 
+  },
+  cross:function(game,pointer){
+      var tagID = this.convertPointer(pointer);
+        if(tagID===0)
+            game.physics.arcade.moveToXY(this.crossOv,pointer.x,pointer.y,1000,1000);
   }
 };
