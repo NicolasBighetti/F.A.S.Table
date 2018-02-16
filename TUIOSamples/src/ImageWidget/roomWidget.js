@@ -60,7 +60,7 @@ class RoomWidget extends TUIOWidget {
   onTagDeletion(tuioTagId){
       this.atoms[tuioTagId] = -1;
       this.atomsNB-=1;
-      console.log('deletion', + tuioTagId);
+      console.log('deletion' + tuioTagId);
 
       super.onTagDeletion(tuioTagId);
       // this._domElem.css('background-color', 'yellow');
