@@ -16,7 +16,7 @@
 -->
     <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
 
-    <script src="src/phaser.min.js"></script>
+    <script src="src/phaser.js"></script>
 
     <script src="src/sound/FastSound.js"></script>
 
@@ -60,8 +60,19 @@
     tuioManager.start();
     tuioManager.addWidget(new RoomWidget(0,0,1080,1920,''));*/
 
+    var cfg = {
+        width: 1920,
+        height: 1080,
+        multiTexture: false,
+        parent: 'game',
+        enableDebug: false,
+        transparent: false,
+        antialias: false,
 
-    var game = new Phaser.Game(1920, 1080, Phaser.CANVAS, 'game');
+    };
+
+     var game = new Phaser.Game(1920, 1080, Phaser.WEBGL, 'game');
+   // var game = new Phaser.Game(cfg);
     game.state.add('TitleScreen', FastTable.TitleScreen);
     game.state.add('IpPicker', FastTable.IpPicker);
     game.state.add('ColorIOTable', FastTable.ColorIOTable);

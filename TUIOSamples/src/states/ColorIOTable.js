@@ -8,7 +8,7 @@ FastTable.ColorIOTable.prototype = {
         this.blueOK=-1;
         this.whiteOK=-1;
         this.sent=false; // 192.168.1.25
-        FastTable.FastSocket = new FASockeT('192.168.1.25');
+        FastTable.FastSocket = new FASockeT('localhost');
         // FastTable.FastSocket = new FASockeT('10.212.115.16');
 
         FastTable.FastSocket.init();
@@ -34,35 +34,42 @@ FastTable.ColorIOTable.prototype = {
         this.frontLayer = this.game.add.tileSprite(0, 0, 1920, 1080, 'star_layer_2');
 
         this.frontLayer.inputEnabled = true;
-        this.frontLayer.events.onInputOver.add(this.cross, this);
+        //this.frontLayer.events.onInputOver.add(this.cross, this);
 
-        this.redPane = this.game.add.sprite(200,200,'red');
-        this.greenPane = this.game.add.sprite(1200,200,'green');
-        this.bluePane = this.game.add.sprite(1200,600,'blue');
-        this.whitePane = this.game.add.sprite(200,600,'white');
+        var other = 1920/2+0;
+        var othery = 1080/2+0;
 
-        this.crossOv = this.game.add.sprite(-100,-100,'croix');
+        this.redPane = this.game.add.sprite(0,0,'red');
+        this.greenPane = this.game.add.sprite(other,0,'green');
+        this.bluePane = this.game.add.sprite(other,othery,'blue');
+        this.whitePane = this.game.add.sprite(0,othery,'white');
 
+        // this.crossOv = this.game.add.sprite(100,100,'croix');
+        // this.crossOv.scale.setTo(0.5,0.5);
 
-        this.redPane.scale.setTo(0.5,0.5);
-        this.greenPane.scale.setTo(0.5,0.5);
-        this.bluePane.scale.setTo(0.5,0.5);
-        this.whitePane.scale.setTo(0.5,0.5);
+        var widthScale = 1;
+        var heightScale = 2;
+
+        this.redPane.scale.setTo(1,1);
+        this.greenPane.scale.setTo(1,1);
+        this.bluePane.scale.setTo(1,1);
+        this.whitePane.scale.setTo(1,1);
 
         this.redPane.inputEnabled = true;
+        this.bluePane.inputEnabled = true;
+        this.greenPane.inputEnabled = true;
+        this.whitePane.inputEnabled = true;
+
         this.redPane.events.onInputOver.add(this.redover, this);
         this.redPane.events.onInputOut.add(this.redover2, this);
 
-        this.bluePane.inputEnabled = true;
         this.bluePane.events.onInputOver.add(this.bluePaneover, this);
         this.bluePane.events.onInputOut.add(this.bluePaneover2, this);
 
-        this.greenPane.inputEnabled = true;
         this.greenPane.events.onInputOver.add(this.greenPaneover, this);
         this.greenPane.events.onInputOut.add(this.greenPaneover2, this);
 
 
-        this.whitePane.inputEnabled = true;
         this.whitePane.events.onInputOver.add(this.whitePaneover, this);
         this.whitePane.events.onInputOut.add(this.whitePaneover2, this);
 
@@ -73,10 +80,21 @@ FastTable.ColorIOTable.prototype = {
         this.bluePane.alpha = 0.5;
         this.whitePane.alpha = 0.5;
 
+        this.game.input.addPointer();
+        this.game.input.addPointer();
+        this.game.input.addPointer();
+        this.game.input.addPointer();
+        this.game.input.addPointer();
+        this.game.input.addPointer();
+        this.game.input.addPointer();
+
 
     },
     redover:function (game,pointer) {
-        var tagID = this.convertPointer(pointer);
+        var tagID = pointer.id;
+        console.log(game);
+        console.log(pointer);
+
         this.redPane.alpha = 1;
         this.redOK=tagID;
         console.log('red'+tagID);
@@ -84,7 +102,7 @@ FastTable.ColorIOTable.prototype = {
 
     },
     greenPaneover:function (game,pointer) {
-        var tagID = this.convertPointer(pointer);
+        var tagID = pointer.id;
         this.greenOK=tagID;
         this.greenPane.alpha = 1;
 
@@ -93,7 +111,7 @@ FastTable.ColorIOTable.prototype = {
 
     },bluePaneover:function (game,pointer) {
 
-        var tagID = this.convertPointer(pointer);
+        var tagID = pointer.id;
         this.blueOK=tagID;
         this.bluePane.alpha = 1;
 
@@ -101,7 +119,7 @@ FastTable.ColorIOTable.prototype = {
         this.checkSend();
 
     },whitePaneover:function (game,pointer) {
-        var tagID = this.convertPointer(pointer);
+        var tagID = pointer.id;
         this.whiteOK=tagID;
 
         this.whitePane.alpha = 1;
@@ -111,16 +129,15 @@ FastTable.ColorIOTable.prototype = {
 
     },
     bluePaneover2:function (game,pointer) {
-          var tagID = this.convertPointer(pointer);
-          if(tagID==this.blueOK){
-              this.bluePane.alpha = 0.5;
-              console.log('blue remove'+tagID);
-          }
-          console.log('not same');
+        var tagID = pointer.id;
+      if(tagID==this.blueOK){
+          this.bluePane.alpha = 0.5;
+          console.log('blue remove'+tagID);
+      }
 
     },
     greenPaneover2:function (game,pointer) {
-        var tagID = this.convertPointer(pointer);
+        var tagID = pointer.id;
         //this.greenPane.alpha = 0.5;
 
         if(tagID==this.greenOK){
@@ -129,14 +146,14 @@ FastTable.ColorIOTable.prototype = {
         }
     },
     whitePaneover2:function (game,pointer) {
-        var tagID = this.convertPointer(pointer);
+        var tagID = pointer.id;
         if(tagID==this.whiteOK){
             this.whitePane.alpha = 0.5;
             console.log('whitePane remove'+tagID);
         }
     },
     redover2:function (game,pointer) {
-        var tagID = this.convertPointer(pointer);
+        var tagID = pointer.id;
         if(tagID==this.redOK){
             this.redPane.alpha = 0.5;
             console.log('redPane remove'+tagID);
@@ -147,7 +164,11 @@ FastTable.ColorIOTable.prototype = {
         if(this.redOK===-1||this.blueOK===-1||this.greenOK===-1||this.whiteOK===-1){
             return;
         }
-
+        console.log('sending start to serv');
+        if(this.sent){
+            console.log('connect already sent');
+            return;
+        }
         var jsonObject1 = {
             ATOM_PLAYER_ID: this.redOK,
             ATOM_PHONE_ID: 1
@@ -164,11 +185,7 @@ FastTable.ColorIOTable.prototype = {
             ATOM_PLAYER_ID: this.whiteOK,
             ATOM_PHONE_ID: 7
         };
-        console.log('sending start to serv');
-        if(this.sent){
-            console.log('connect already sent');
-            return;
-        }
+
         this.sent = true;
         FastTable.FastSocket.serverSocket.emit('FAST_PHONE_CONNECT', jsonObject1);
         FastTable.FastSocket.serverSocket.emit('FAST_PHONE_CONNECT', jsonObject2);
@@ -184,35 +201,25 @@ FastTable.ColorIOTable.prototype = {
 
 
     },
-
-    convertPointer:function (pointer) {
-        return this.conver(pointer.leftButton.isDown,pointer.rightButton.isDown,pointer.middleButton.isDown);
-    },
-    conver:function(left,right,middle){
-        if(!left&&!right&&!middle){
-            return 0;
-        }
-        if(left&&!right&&!middle){
-            return 1;
-        }
-        if(!left&&right&&!middle){
-            return 2;
-        }
-
-        if(left&&right&&!middle){
-            return 3;
-        }
-        return -1;
-    },
   update: function(){
       this.background.tilePosition.x += 0.1;
       this.mediumLayer.tilePosition.x += 0.3;
       this.frontLayer.tilePosition.x += 0.5;
 
+
   },
-  cross:function(game,pointer){
-      var tagID = this.convertPointer(pointer);
-        if(tagID===0)
-            this.game.physics.arcade.moveToXY(this.crossOv,pointer.x,pointer.y,1000,1000);
-  }
+
+     render:function() {
+    var game = this.game;
+    //  Just renders out the pointer data when you touch the canvas
+    game.debug.pointer(game.input.mousePointer);
+    game.debug.pointer(game.input.pointer1);
+    game.debug.pointer(game.input.pointer2);
+    game.debug.pointer(game.input.pointer3);
+    game.debug.pointer(game.input.pointer4);
+    game.debug.pointer(game.input.pointer5);
+    game.debug.pointer(game.input.pointer6);
+
+}
+
 };
