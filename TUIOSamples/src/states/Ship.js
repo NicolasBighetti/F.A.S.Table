@@ -23,7 +23,17 @@ FastTable.Ship.prototype = {
         this.game.load.image('shield', './src/img/TBE_Shield2.png');
         this.game.load.image('target', './src/img/target.png');
 
+        this.game.load.image('roomB', './src/img/room_b.png');
+        this.game.load.image('roomBL', './src/img/room_corner_bot_left.png');
+        this.game.load.image('roomBR', './src/img/room_corner_bot_right.png');
 
+        this.game.load.image('roomL', './src/img/room_l.png');
+        this.game.load.image('roomM', './src/img/room_m.png');
+        this.game.load.image('roomRi', './src/img/room_r.png');
+
+        this.game.load.image('roomT', './src/img/room_t.png');
+        this.game.load.image('roomTL', './src/img/roomcorner_top_left.png');
+        this.game.load.image('roomTR', './src/img/roomcorner_top_right.png');
 
         this.game.load.image('roomS', './src/img/piece_shield.png');
         this.game.load.image('roomE', './src/img/piece_vide_70x70.png');
@@ -116,7 +126,7 @@ FastTable.Ship.prototype = {
         this.healthBar.cropRect = new Phaser.Rectangle(0, 0, this.healthBar.width, this.healthBar.height);
         this.healthBar.crop(this.healthBar.cropRect);
         this.healthBar.oriHeight = this.healthBar.height;
-        this.healthBar.events.onInputOver.add(this.changeHealth,this);
+        //this.healthBar.events.onInputOver.add(this.changeHealth,this);
         this.healthBar.enableBody = true;
         this.healthBar.physicsBodyType = Phaser.Physics.ARCADE;
         // this.shipPic.addChild(this.healthBar);
@@ -135,21 +145,21 @@ FastTable.Ship.prototype = {
         var yIndex = 0;
 
         //create rooms by row
-        this.group.create(yIndex, yIndex++,  'roomE');
+        this.group.create(yIndex, yIndex++,  'roomTL');
         this.group.create(yIndex, yIndex++,  'roomS');
-        this.group.create(yIndex, yIndex++,  'roomE');
-        this.group.create(yIndex, yIndex++,  'roomE');
+        this.group.create(yIndex, yIndex++,  'roomT');
+        this.group.create(yIndex, yIndex++,  'roomTR');
 
         this.group.create(yIndex, yIndex++,  'roomR');
-        this.group.create(yIndex, yIndex++,  'roomE');
-        this.group.create(yIndex, yIndex++,  'roomE');
+        this.group.create(yIndex, yIndex++,  'roomM');
+        this.group.create(yIndex, yIndex++,  'roomM');
         this.group.create(yIndex, yIndex++,  'roomW');
 
 
-        this.group.create(yIndex, yIndex++,  'roomE');
+        this.group.create(yIndex, yIndex++,  'roomBL');
         this.group.create(yIndex, yIndex++,  'roomS');
-        this.group.create(yIndex, yIndex++,  'roomE');
-        this.group.create(yIndex, yIndex,  'roomE');
+        this.group.create(yIndex, yIndex++,  'roomB');
+        this.group.create(yIndex, yIndex,  'roomBR');
 
         // set room index & context
         var pos = 0;
@@ -213,43 +223,21 @@ FastTable.Ship.prototype = {
         this.light.anchor.x = 0.3;
         this.light.anchor.y = 0.5;
         this.light.inputEnabled = true;
-
         this.light.context = this;
         this.light.events.onInputOver.add(this.createLight,this);
-
         this.game.physics.enable(this.light, Phaser.Physics.ARCADE);
-
         this.light.body.drag.set(100);
         this.light.body.maxVelocity.set(0);
 
 
-        this.bullets = game.add.group();
-        this.bullets.enableBody = true;
-        this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-        this.bullets.createMultiple(5, 'shotblue');
-
-        this.bullets.setAll('checkWorldBounds', true);
-        this.bullets.setAll('outOfBoundsKill', true);
-        this.bullets.setAll('anchor.x', 0.5);
-        this.bullets.setAll('anchor.y', 0.5);
-        this.bullets.setAll('rotation', Math.PI/2);
-
-        this.bullets.forEach(function(item){
-            item.spriteO = this.light;
-        },this);
-        //this.bullets.setAll('spriteO',this.light);
-        this.bulletTime = 0;
 
         // ennemy ship
         this.groupEn = this.game.add.group();
         this.groupEn.x = 1700;
-        this.groupEn.y = 0;
-
-
+        this.groupEn.y = -50;
         this.groupEn.create(yIndex, yIndex++,  'shipen');
         this.groupEn.create(yIndex, yIndex++,  'shipen');
         this.groupEn.create(yIndex, yIndex++,  'shipen');
-
         this.groupEn.enableBody = true;
         this.groupEn.physicsBodyType = Phaser.Physics.ARCADE;
         //enemy shot
@@ -257,18 +245,48 @@ FastTable.Ship.prototype = {
 
         //var sprite = this.light;
 
+        //our weapon
         //sprite.body.allowRotation = false;
         var that  = this;
+        this.bullets = game.add.group();
+        this.bulletss = this.game.add.weapon(10,'shotblue',0,this.bullets);
+        //that.game.physics.arcade.enable(this.light);
+        this.bulletss.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
+        this.bulletss.bulletSpeed = 600;
+        this.bulletss.fireRate = 100;
 
+        this.bulletss.trackSprite(this.light, 0, 0, true);
+        //item.weapon = weapon;
+       /* this.bullets.enableBody = true;
+        this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
+        this.bullets.createMultiple(5, 'shotblue');
+
+        this.bullets.setAll('checkWorldBounds', true);
+        this.bullets.setAll('outOfBoundsKill', true);
+        this.bullets.setAll('anchor.x', 0.5);
+        this.bullets.setAll('anchor.y', 0.5);
+        this.bullets.setAll('rotation', Math.PI/2);*/
+
+        this.bullets.forEach(function(item){
+            item.spriteO = this.light;
+        },this);
+        //this.bullets.setAll('spriteO',this.light);
+        this.bulletTime = 0;
+        var anim = game.add.tween(this.groupEn).to( { y: '+100' }, 2000, "Sine.easeInOut",true,0,100,true);
 
         this.groupEn.forEach(function (item) {
             console.log(item);
+
+            //set anchor and rotation and scale
             item.anchor.setTo(0.5,0.5);
             item.rotation = -Math.PI;
             item.scale.setTo(2,2);
+
+            //health
+
+            //weapon and physics
             item.health = 100;
             var weapon = game.add.weapon(100, 'shotred');
-
             that.game.physics.arcade.enable(item);
             item.body.drag.set(70);
             item.body.maxVelocity.set(10);
@@ -276,29 +294,38 @@ FastTable.Ship.prototype = {
           /*  weapon.bullets.forEach(function (itemm) {
                itemm.tint = 0xFF0000;
             });*/
-            //  The bullet will be automatically killed when it leaves the world bounds
             weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-
-            //  The speed at which the bullet is fired
             weapon.bulletSpeed = 600;
-
-            //  Speed-up the rate of fire, allowing them to shoot 1 bullet every 60ms
             weapon.fireRate = 1000;
+
+            //track ship and rotation
             weapon.trackSprite(item, 0, 0, true);
             item.weapon = weapon;
+            //anim.yoyo(true);
+            //tween shio
+
         });
         this.groupEn.align(1, 3, 150, 1080/3,Phaser.CENTER);
-        // handle a fire event
-        FastTable.FastSocket.serverSocket.on('FAST_GAME_FIRE', function (data){
-            console.log('hey');
-            var posInt = parseInt(data.pos);
+
+        function findInPZ(array,pos){
+            console.log('find'+pos);
             var elemen = undefined;
             console.log(that);
             //find element in group
-            that.group.forEach(function (element) {
-                if(element.pos==posInt)
+            array.forEach(function (element) {
+                if(element.pos==pos){
                     elemen=element;
+                    return elemen;
+                }
             });
+            return elemen;
+
+        }
+        // handle a fire event
+        FastTable.FastSocket.serverSocket.on('FAST_GAME_FIRE', function (data){
+            console.log('hey');
+            var posInt = parseInt(data.ROOM);
+            var elemen = findInPZ(that.group,posInt);
 
             if (data.FIRE) {
                 if(elemen.fire)
@@ -321,13 +348,10 @@ FastTable.Ship.prototype = {
         });
         FastTable.FastSocket.serverSocket.on('FAST_GAME_SWITCH', function (data){
             console.log('hey switch');
-            var posInt = parseInt(data.pos);
-            var elemen = undefined;
-            //find element in group
-            that.group.forEach(function (element) {
-                if(element.pos==posInt)
-                    elemen=element;
-            });
+            var posInt = parseInt(data.ROOM);
+            var elemen = findInPZ(that.group,posInt);
+
+
 
             if (data.FIRE) {
                 if(elemen.light)
@@ -347,13 +371,9 @@ FastTable.Ship.prototype = {
         });
         FastTable.FastSocket.serverSocket.on('FAST_GAME_METEOR', function (data){
             console.log('hey meteor');
-            var posInt = parseInt(data.pos);
-            var elemen = undefined;
-            //find element in group
-            that.group.forEach(function (element) {
-                if(element.pos==posInt)
-                    elemen=element;
-            });
+            var posInt = parseInt(data.ROOM);
+            var elemen = findInPZ(that.group,posInt);
+
 
             if (data.FIRE) {
                 if(elemen.shield)
@@ -371,13 +391,8 @@ FastTable.Ship.prototype = {
         });
         FastTable.FastSocket.serverSocket.on('FAST_GAME_BALLISTIC', function (data){
             console.log('hey meteor');
-            var posInt = parseInt(data.pos);
-            var elemen = undefined;
-            //find element in group
-            that.group.forEach(function (element) {
-                if(element.pos==posInt)
-                    elemen=element;
-            });
+            var posInt = parseInt(data.ROOM);
+            var elemen = findInPZ(that.group,posInt);
 
             if (data.FIRE) {
                 if(elemen.bal)
@@ -393,33 +408,36 @@ FastTable.Ship.prototype = {
                 //elemen.children.removeAll();
             }
         });
+        FastTable.FastSocket.serverSocket.on('FIRE_WEAPON', function (data){
+            that.fireBullet(data.PREC);
+        });
     },
-     fireBullet:function () {
-        console.log('fire');
-        if (this.game.time.now > this.bulletTime)
-        {
+     fireBullet:function (data) {
+        console.log('fireBullet'+data);
+        var angle = (100-data)*0.9;
+         this.bulletss.bulletAngleVariance=angle;
 
-            var bullet = this.bullets.getFirstExists(false);
-
-            if (bullet)
-            {
-
-                // not good coordinate
-                bullet.reset(bullet.spriteO.body.x + bullet.spriteO.body.halfWidth, bullet.spriteO.body.y + + bullet.spriteO.body.halfHeight);
-                bullet.lifespan = 2000;
-                bullet.rotation = bullet.spriteO.rotation;
-                this.game.physics.arcade.velocityFromRotation(bullet.spriteO.rotation, 400,bullet.body.velocity);
-                this.bulletTime = this.game.time.now + 50;
-            }
+         this.weaponCounter = this.game.time.events.loop(170, this.updateCounter, this);
+         this.bulletsToShoot = Math.floor(data/10);
 
 
-        }
-         this.groupEn.forEach(function (item) {
-             if(item.weapon)
-            item.weapon.fire();
-         });
 
 },
+    updateCounter:function () {
+        if(this.bulletsToShoot<=0){
+            this.game.time.events.remove(this.weaponCounter);
+        }
+        else{
+            this.bulletss.fire();
+            this.bulletsToShoot--;
+
+        }
+    },fireEn:function(){
+        this.groupEn.forEach(function (item) {
+            if(item.weapon)
+                item.weapon.fire();
+        });
+    },
     changeHealth:function(item,context){
       console.log(item.health);
       if(item.health>8)
@@ -470,10 +488,22 @@ FastTable.Ship.prototype = {
       this.frontLayer.tilePosition.x -= (0.5*this.xspeed);
       if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
       {
-          this.fireBullet();
+          this.fireEn();
       }
+      if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
+      {
 
-
+          this.bulletss.bulletAngleVariance+=1;
+          console.log(this.bulletss.bulletAngleVariance);
+      }
+      if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
+      {
+          this.bulletss.bulletAngleVariance-=1;
+      }
+      if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
+      {
+          this.bulletss.bulletAngleVariance=0;
+      }
       //ennemy to friend
         if(this.groupEn){
             // friend to ennemy
@@ -490,7 +520,9 @@ FastTable.Ship.prototype = {
 
             });
         }
-
+        if(this.xspeed>1){
+          this.xspeed*=0.995;
+        }
   },
     hitEnemy:function (bullet,sprite) {
 
