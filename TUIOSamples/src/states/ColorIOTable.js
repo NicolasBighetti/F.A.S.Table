@@ -8,7 +8,8 @@ FastTable.ColorIOTable.prototype = {
         this.blueOK=-1;
         this.whiteOK=-1;
         this.sent=false; // 192.168.1.25
-        FastTable.FastSocket = new FASockeT('192.168.1.25');
+        FastTable.FastSocket = new FASockeT('10.212.115.16');
+        // FastTable.FastSocket = new FASockeT('192.168.1.25');
         // FastTable.FastSocket = new FASockeT('10.212.115.16');
 
         FastTable.FastSocket.init();
@@ -91,7 +92,7 @@ FastTable.ColorIOTable.prototype = {
 
     },
     redover:function (game,pointer) {
-        var tagID = pointer.id;
+        var tagID = pointer.tiltY;
         console.log(game);
         console.log(pointer);
 
@@ -102,7 +103,7 @@ FastTable.ColorIOTable.prototype = {
 
     },
     greenPaneover:function (game,pointer) {
-        var tagID = pointer.id;
+        var tagID = pointer.tiltY;
         this.greenOK=tagID;
         this.greenPane.alpha = 1;
 
@@ -111,7 +112,7 @@ FastTable.ColorIOTable.prototype = {
 
     },bluePaneover:function (game,pointer) {
 
-        var tagID = pointer.id;
+        var tagID = pointer.tiltY;
         this.blueOK=tagID;
         this.bluePane.alpha = 1;
 
@@ -119,7 +120,7 @@ FastTable.ColorIOTable.prototype = {
         this.checkSend();
 
     },whitePaneover:function (game,pointer) {
-        var tagID = pointer.id;
+        var tagID = pointer.tiltY;
         this.whiteOK=tagID;
 
         this.whitePane.alpha = 1;
@@ -129,7 +130,7 @@ FastTable.ColorIOTable.prototype = {
 
     },
     bluePaneover2:function (game,pointer) {
-        var tagID = pointer.id;
+        var tagID = pointer.tiltY;
       if(tagID==this.blueOK){
           this.bluePane.alpha = 0.5;
           console.log('blue remove'+tagID);
@@ -137,7 +138,7 @@ FastTable.ColorIOTable.prototype = {
 
     },
     greenPaneover2:function (game,pointer) {
-        var tagID = pointer.id;
+        var tagID = pointer.tiltY;
         //this.greenPane.alpha = 0.5;
 
         if(tagID==this.greenOK){
@@ -146,14 +147,14 @@ FastTable.ColorIOTable.prototype = {
         }
     },
     whitePaneover2:function (game,pointer) {
-        var tagID = pointer.id;
+        var tagID = pointer.tiltY;
         if(tagID==this.whiteOK){
             this.whitePane.alpha = 0.5;
             console.log('whitePane remove'+tagID);
         }
     },
     redover2:function (game,pointer) {
-        var tagID = pointer.id;
+        var tagID = pointer.tiltY;
         if(tagID==this.redOK){
             this.redPane.alpha = 0.5;
             console.log('redPane remove'+tagID);

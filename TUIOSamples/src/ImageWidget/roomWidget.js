@@ -11,33 +11,24 @@ class RoomWidget extends TUIOWidget {
     this.game = gamep;
     this._lastTouchesValues = {};
     this._lastTagsValues = {};
-    this.eventsList = [];
-    this.dors = [];
+
     this.atoms = [];
-      this.atomsOS = [];
-      for(var i = 0;i<4;i++){
-          this.atomsOS[i]=-1;
-      }
-    this.atomsNB = 0;
+
     console.log('ROOM WIDGET CREATED');
 
   }
-  findFirstEmptyTagIndex(){
-      for(var i = 0;i<4;i++){
-          if(this.atomsOS[i]===-1){
-              return i;
-          }
-      }
-      return -1;
-  }
-  createDown(id,x,y){
+
+  createDown(id,x,y,ang){
       var event = new PointerEvent('pointerdown', {
           view: window,
           bubbles: true,
           cancelable: true,
           pointerId:id,
           clientX: x,
-          clientY: y
+          clientY: y,
+          tiltY:id,
+          tiltX:ang*1000
+
       });
       var yz = document.getElementsByTagName("canvas")[0];
       yz.dispatchEvent(event);
@@ -52,11 +43,12 @@ class RoomWidget extends TUIOWidget {
           clientY: y,
           angle:ang,
           tiltX:ang*1000,
-          tiltY:ang,
+          tiltY:id,
           tuioTag:tuioTag2,
-          aaaa:'aa'
+          id:tuioTag2.id
       });
       var yz = document.getElementsByTagName("canvas")[0];
+      //console.log('move'+tuioTag2.id);
       yz.dispatchEvent(event);
   }
   createUp(id){
@@ -64,42 +56,48 @@ class RoomWidget extends TUIOWidget {
           view: window,
           bubbles: true,
           cancelable: true,
-          pointerId:id
+          pointerId:id,
+          tiltY:id
+
       });
 
       var yz = document.getElementsByTagName("canvas")[0];
       yz.dispatchEvent(event);
   }
   onTagCreation(tuioTag) {
-    //super.onTagCreation(tuioTag);
+    super.onTagCreation(tuioTag);
     //var index = this.findFirstEmptyTagIndex();
     //console.log('index free:'+index);
     //this.atomsOS[index] = tuioTag.id;
       //
       console.log(this.atoms[tuioTag.id]);
-      if(this.atoms[tuioTag.id]===1){
-          this.createmove(4,tuioTag.x,tuioTag.y,tuioTag._angle,tuioTag);
+      /*if(this.atoms[tuioTag.id]===1){
+          this.createmove(tuioTag.id,tuioTag.x,tuioTag.y,tuioTag._angle,tuioTag);
             return;
-      }
+      }*/
       this.atoms[tuioTag.id] = 1;
     console.log('creation', + tuioTag.x +' '+ tuioTag.y+' '+tuioTag.id);
     console.dir(tuioTag);
-    console.dir(this.atomsOS);
     console.dir(this.atoms);
-    this.createDown(4,tuioTag.x,tuioTag.y);
+    this.createDown(tuioTag.id,tuioTag.x,tuioTag.y);
   }
-    onTagUpdate(tuioTag) {
-        // console.log('up'+tuioTag.id);
-       var ang = tuioTag._angle;
-       //console.log(ang);
-        this.createmove(4,tuioTag.x,tuioTag.y,ang,tuioTag);
-    }
+
+  onTagUpdate(tuioTag) {
+      super.onTagUpdate(tuioTag);
+
+      //console.log('update');
+
+
+    var ang = tuioTag._angle;
+    this.createmove(tuioTag.id,tuioTag.x,tuioTag.y,ang,tuioTag);
+  }
+
   onTagDeletion(tuioTagId){
+      super.onTagDeletion(tuioTagId);
 
       console.log('deletion' + tuioTagId);
-      //this.createUp(tuioTagId);
+      this.createUp(tuioTagId);
 
-      //super.onTagDeletion(tuioTagId);
       // this._domElem.css('background-color', 'yellow');
   }
     onTouchCreation(tuioTouch){

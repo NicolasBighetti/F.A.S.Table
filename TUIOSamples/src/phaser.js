@@ -40018,6 +40018,7 @@ Phaser.Pointer.prototype = {
         this.pageY = event.pageY;
 
         this.tiltX = event.tiltX;
+        this.tiltY = event.tiltY;
 
         this.screenX = event.screenX;
         this.screenY = event.screenY;

@@ -58,11 +58,11 @@ FastTable.Ship.prototype = {
         item.rotation = pointer.tiltX/1000.;
         console.log(item.context);
         console.log('IN');
-        this.lightID = pointer.id;
+        this.lightID = pointer.tiltY;
         item.game.input.addMoveCallback(function (pointer,x,y,yo,ya) {
             //console.log('move');
 
-            if(this.lightID===pointer.id){
+            if(this.lightID===pointer.tiltY){
                 item.rotation = pointer.tiltX/1000.;
             }
          /*   console.log(this);
@@ -170,9 +170,11 @@ FastTable.Ship.prototype = {
         this.group.scale.setTo(scale,scale);
         this.group.align(4, 3, 72, 72);
 
+
         this.group.setAll('inputEnabled', true);
         this.group.callAll('events.onInputOver.add','events.onInputOver', this.roomGenericCB,this);
-
+        console.log(this.group.children[0]);
+        console.log('debbb');
         var createFlame = function(element, context){
             var fire = context.game.make.sprite(0, 0, 'red_fire');
             element.fire = fire;
@@ -469,6 +471,7 @@ FastTable.Ship.prototype = {
 
     },
     roomGenericCB:function (item,pointer) {
+	    console.log('room ');
         item.context.increaseXspeed();
         item.context.emitRoom(item,pointer);
     },
@@ -479,10 +482,10 @@ FastTable.Ship.prototype = {
     },
     emitRoom:function (room,pointer) {
         //var tagID = this.convertPointer(pointer);
-        console.log('player '+pointer.id+' in '+room);
+        console.log('player '+pointer.tiltY+' in '+room);
         if(!this.playerPos)
             this.playerPos = [];
-        this.playerPos[pointer.id] = room.pos;
+        this.playerPos[pointer.tiltY] = room.pos;
 
         var playersInRoom = [];
 
@@ -494,10 +497,10 @@ FastTable.Ship.prototype = {
             }
         }
 
-        FastTable.FastSocket.serverSocket.emit('ROOM', {TAG_ID:pointer.id
+        FastTable.FastSocket.serverSocket.emit('ROOM', {TAG_ID:pointer.tiltY
             ,ROOM:room.pos
             ,FIRE:room.fire!==undefined
-            ,LIGHT: rroom.fire!==undefined,
+            ,LIGHT: room.fire!==undefined,
             BALL:room.fire!==undefined,
             SHIELD:room.shield!==undefined,
             START:true,
