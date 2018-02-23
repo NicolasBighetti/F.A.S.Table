@@ -414,11 +414,13 @@ FastTable.Ship.prototype = {
     },
      fireBullet:function (data) {
         console.log('fireBullet'+data);
-        var angle = (100-data)*0.9;
+        if(!data)
+            return;
+         var angle = (100-data)*0.9;
          this.bulletss.bulletAngleVariance=angle;
 
          this.weaponCounter = this.game.time.events.loop(170, this.updateCounter, this);
-         this.bulletsToShoot = Math.floor(data/10);
+         this.bulletsToShoot = Math.floor((data/10)+1);
 
 
 
@@ -468,7 +470,7 @@ FastTable.Ship.prototype = {
     },
     roomGenericCB:function (item,pointer) {
         item.context.increaseXspeed();
-        item.context.emitRoom(item.pos,pointer);
+        item.context.emitRoom(item,pointer);
     },
     increaseXspeed:function(){
       if(this.xspeed===undefined)
@@ -478,8 +480,29 @@ FastTable.Ship.prototype = {
     emitRoom:function (room,pointer) {
         //var tagID = this.convertPointer(pointer);
         console.log('player '+pointer.id+' in '+room);
+        if(!this.playerPos)
+            this.playerPos = [];
+        this.playerPos[pointer.id] = room.pos;
 
-        FastTable.FastSocket.serverSocket.emit('ROOM', {TAG_ID:pointer.id,ROOM:room});
+        var playersInRoom = [];
+
+        for (var property1 in this.playerPos) {
+            if(this.playerPos.hasOwnProperty(property1)){
+                if(this.playerPos[property1]===room.pos){
+                    playersInRoom.push(property1);
+                }
+            }
+        }
+
+        FastTable.FastSocket.serverSocket.emit('ROOM', {TAG_ID:pointer.id
+            ,ROOM:room.pos
+            ,FIRE:room.fire!==undefined
+            ,LIGHT: rroom.fire!==undefined,
+            BALL:room.fire!==undefined,
+            SHIELD:room.shield!==undefined,
+            START:true,
+            PLAYERS:playersInRoom
+        });
 
     },
   update: function(){

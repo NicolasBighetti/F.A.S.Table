@@ -71,49 +71,35 @@ class RoomWidget extends TUIOWidget {
       yz.dispatchEvent(event);
   }
   onTagCreation(tuioTag) {
-    super.onTagCreation(tuioTag);
-    var index = this.findFirstEmptyTagIndex();
-    console.log('index free:'+index);
-    this.atomsOS[index] = tuioTag.id;
-      this.atoms[tuioTag.id] = index;
-      this.atomsNB+=1;
+    //super.onTagCreation(tuioTag);
+    //var index = this.findFirstEmptyTagIndex();
+    //console.log('index free:'+index);
+    //this.atomsOS[index] = tuioTag.id;
+      //
+      console.log(this.atoms[tuioTag.id]);
+      if(this.atoms[tuioTag.id]===1){
+          this.createmove(4,tuioTag.x,tuioTag.y,tuioTag._angle,tuioTag);
+            return;
+      }
+      this.atoms[tuioTag.id] = 1;
     console.log('creation', + tuioTag.x +' '+ tuioTag.y+' '+tuioTag.id);
     console.dir(tuioTag);
     console.dir(this.atomsOS);
     console.dir(this.atoms);
-    this.createDown(index,tuioTag.x,tuioTag.y);
+    this.createDown(4,tuioTag.x,tuioTag.y);
   }
     onTagUpdate(tuioTag) {
         // console.log('up'+tuioTag.id);
-        var index = this.atoms[tuioTag.id];
-       /* var event = new MouseEvent('mousemove', {
-            'view': window,
-            'bubbles': true,
-            'cancelable': true,
-            'clientX': tuioTag.x,
-            'clientY': tuioTag.y,
-            'buttons': index,
-            'button': index
-
-        });
-        //console.log(event.identifier)
-        var y = document.getElementsByTagName("canvas")[0];
-        //console.log(y);
-        y.dispatchEvent(event);*/
-       //console.dir(tuioTag);
        var ang = tuioTag._angle;
        //console.log(ang);
-        this.createmove(index,tuioTag.x,tuioTag.y,ang,tuioTag);
+        this.createmove(4,tuioTag.x,tuioTag.y,ang,tuioTag);
     }
   onTagDeletion(tuioTagId){
-      var inverI = this.atoms[tuioTagId];
-      this.atomsOS[inverI] = -1;
-      this.atoms[tuioTagId] = -1;
-      this.atomsNB-=1;
-      console.log('deletion' + tuioTagId);
-      this.createUp(tuioTagId);
 
-      super.onTagDeletion(tuioTagId);
+      console.log('deletion' + tuioTagId);
+      //this.createUp(tuioTagId);
+
+      //super.onTagDeletion(tuioTagId);
       // this._domElem.css('background-color', 'yellow');
   }
     onTouchCreation(tuioTouch){
@@ -131,13 +117,13 @@ class RoomWidget extends TUIOWidget {
         // event.isTrusted = true;
         // console.log(event.identifier)
         var y = document.getElementsByTagName("canvas")[0];
-        y.dispatchEvent(event);
+        //y.dispatchEvent(event);
 
     }
 
       onTouchUpdate(tuioTouch) {
           //super.onTouchUpdate(tuioTouch);
-        console.log('update'+tuioTouch);
+        //console.log('update'+tuioTouch);
 
 
       /*    var event = new PointerEvent('pointermove', {
@@ -171,7 +157,7 @@ class RoomWidget extends TUIOWidget {
         // console.log(event.identifier)
         var y = document.getElementsByTagName("canvas")[0];
         //console.log(y);
-        y.dispatchEvent(event);
+       // y.dispatchEvent(event);
     }
 
 }
