@@ -8,7 +8,7 @@ FastTable.ColorIOTable.prototype = {
         this.blueOK=-1;
         this.whiteOK=-1;
         this.sent=false; // 192.168.1.25
-        FastTable.FastSocket = new FASockeT('localhost');
+        FastTable.FastSocket = new FASockeT('192.168.1.25');
         // FastTable.FastSocket = new FASockeT('10.212.115.16');
 
         FastTable.FastSocket.init();
