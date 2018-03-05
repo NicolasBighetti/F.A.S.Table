@@ -34,6 +34,9 @@ Pour lancer le projet, déplacez vous dans le dossier ou le projet a été insta
 
 L'application tourne à présent en localhost sur le port 3000
 
+## Spécifications du projet  
+https://docs.google.com/document/d/1FWADMczN9g2uVyr7bRIQOU0Bd298s5VFPcLsCtjj-Po/edit#
+
 # Contributeurs
 Alison BERLIOZ
 Nicolas BIGHETTI
